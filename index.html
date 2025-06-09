@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hoja de Vida - Anthony Vera</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4f7f8 0%, #e8f4f8 100%);
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0077b6 0%, #023e8a 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        header nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        header nav a.active {
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 4px solid #0077b6;
+            box-shadow: 0 8px 20px rgba(0, 119, 182, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #0077b6;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #023e8a;
+            padding-bottom: 8px;
+            font-size: 1.8em;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #0077b6, #023e8a);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        ul li:hover {
+            background: rgba(0, 119, 182, 0.05);
+            border-radius: 8px;
+            padding: 8px 8px 8px 20px;
+        }
+
+        ul li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #0077b6;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Estilos para certificados */
+        .certificate-item {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%);
+            border: 2px solid #0077b6;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.1);
+        }
+
+        .certificate-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 119, 182, 0.2);
+        }
+
+        .certificate-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .certificate-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0077b6, #023e8a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .certificate-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #023e8a;
+            margin: 0;
+        }
+
+        .certificate-details {
+            margin-bottom: 15px;
+        }
+
+        .certificate-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0077b6, #023e8a);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 119, 182, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #0077b6;
+            border: 2px solid #0077b6;
+        }
+
+        .btn-secondary:hover {
+            background: #0077b6;
+            color: white;
+        }
+
+        /* Estilos para las habilidades con barras verticales */
+        .skills {
+            display: flex;
+            justify-content: space-around;
+            align-items: end;
+            margin-top: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            text-align: center;
+            min-width: 120px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-bar-container {
+            width: 60px;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 30px;
+            margin: 0 auto 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-bar {
+            width: 100%;
+            background: linear-gradient(to top, #023e8a, #0077b6, #00b4d8);
+            border-radius: 30px;
+            position: absolute;
+            bottom: 0;
+            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 -2px 10px rgba(0, 119, 182, 0.3);
+        }
+
+        .skill-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #023e8a;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .skill-description {
+            font-size: 12px;
+            color: #666;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill:hover .skill-description {
+            opacity: 1;
+        }
+
+        /* Section padding y animaciones */
+        section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+        section:nth-child(8) { animation-delay: 0.8s; }
+        section:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            header nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #0077b6 0%, #023e8a 100%);
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            header nav.active {
+                display: flex;
+            }
+
+            header nav a {
+                margin: 5px 0;
+                text-align: center;
+                padding: 12px;
+            }
+
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .skills {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .skill {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .skill-bar-container {
+                width: 80px;
+                height: 150px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .certificate-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .skill-bar-container {
+                width: 60px;
+                height: 120px;
+            }
+
+            header nav a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .certificate-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Efecto de scroll suave mejorado */
+        html {
+            scroll-padding-top: 80px;
+        }
+
+        /* Indicador de scroll */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #0077b6, #00b4d8);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="scroll-indicator"></div>
+
+<header>
+    <div class="nav-container">
+        <button class="nav-toggle" onclick="toggleNav()">☰</button>
+        <nav id="nav-menu">
+            <a href="#datos-personales" onclick="setActive(this)">Datos Personales</a>
+            <a href="#perfil" onclick="setActive(this)">Perfil Profesional</a>
+            <a href="#formacion" onclick="setActive(this)">Formación Académica</a>
+            <a href="#experiencia" onclick="setActive(this)">Experiencia Laboral</a>
+            <a href="#cursos" onclick="setActive(this)">Cursos</a>
+            <a href="#idiomas" onclick="setActive(this)">Idiomas</a>
+            <a href="#fortalezas" onclick="setActive(this)">Fortalezas</a>
+            <a href="#intereses" onclick="setActive(this)">Intereses</a>
+            <a href="#habilidades" onclick="setActive(this)">Habilidades</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+    <section id="datos-personales">
+        <h2>Datos Personales</h2>
+        <img src="perfil.jpg" alt="Foto de Anthony Vera" class="profile-photo" />
+        <p><strong>Nombre:</strong> Anthony Javier Vera Zambrano</p>
+        <p><strong>Fecha y lugar de nacimiento:</strong> 7 de Enero de 2006, Quito - Ecuador</p>
+        <p><strong>Ciudad de residencia:</strong> Quito, Pichincha</p>
+        <p><strong>Correo:</strong> veraanthony127@gmail.com</p>
+        <p><strong>Teléfono:</strong> 0969038863</p>
+    </section>
+
+    <section id="perfil">
+        <h2>Perfil Profesional</h2>
+        <p>Actualmente estudio Desarrollo de Software en el Instituto Superior Tecnológico Cordillera, con un gran interés por ampliar mis conocimientos y habilidades en el desarrollo de sistemas y nuevas inteligencias artificiales. Me esfuerzo por aprender continuamente y aplicar mis conocimientos para crear soluciones innovadoras.</p>
+    </section>
+
+    <section id="formacion">
+        <h2>Formación Académica</h2>
+        <ul>
+            <li><strong>Instituto Superior Tecnológico Cordillera</strong> (2024 - Actualidad)<br>
+                Carrera: Desarrollo de Software.</li>
+            <li><strong>Institución Educativa República de Rumania</strong> (2019 - 2024)<br>
+                Bachillerato General Unificado (BGU).</li>
+        </ul>
+    </section>
+
+    <section id="experiencia">
+        <h2>Experiencia Laboral</h2>
+        <ul>
+            <li><strong>Pasante ayudante de bodega</strong> - Aki (2024)<br>
+            Apoyé en la organización y control de inventarios en bodega, desarrollando habilidades en logística, responsabilidad y trabajo en equipo.</li>
+        </ul>
+    </section>
+
+    <section id="cursos">
+        <h2>Cursos y Capacitaciones</h2>
+        
+        <!-- Certificado destacado -->
+        <div class="certificate-item">
+            <div class="certificate-header">
+                <div class="certificate-icon">🎓</div>
+                <div>
+                    <h3 class="certificate-title">Curso profesional de HTML y CSS</h3>
+                    <p style="margin: 0; color: #666; font-size: 14px;">AzulSchool - 2025</p>
+                </div>
+            </div>
+            <div class="certificate-details">
+                <p style="margin: 0;">Adquirí habilidades en HTML, CSS y APIs de JavaScript para desarrollo web, fortaleciendo mis conocimientos en diseño y programación front-end.</p>
+            </div>
+            <div class="certificate-actions">
+                <a href="certificado-html-css.pdf" class="btn btn-primary" target="_blank">
+                    📄 Ver Certificado
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="idiomas">
+        <h2>Idiomas</h2>
+        <ul>
+            <li>Español: Nativo</li>
+            <li>Inglés: Nivel A2 (en proceso de finalización)</li>
+        </ul>
+    </section>
+
+    <section id="fortalezas">
+        <h2>Fortalezas</h2>
+        <p>Responsabilidad, comunicación efectiva, esfuerzo constante, trabajador y colaborativo, con facilidad para integrarme a equipos y aportar al logro de objetivos.</p>
+    </section>
+
+    <section id="intereses">
+        <h2>Intereses</h2>
+        <p>Me gusta la natación para mantenerme activo y saludable. Tengo un gran interés en el aprendizaje y desarrollo de inteligencias artificiales, buscando siempre ampliar mis conocimientos en esta área innovadora.</p>
+    </section>
+
+    <section id="habilidades">
+        <h2>Habilidades Técnicas</h2>
+        <div class="skills">
+            <div class="skill" onclick="animateSkill(this)">
+                <div class="skill-name">Python</div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar" data-percentage="60">
+                        <div class="skill-percentage">60%</div>
+                    </div>
+                </div>
+                <div class="skill-description">Desarrollo backend y scripts</div>
+            </div>
+            <div class="skill" onclick="animateSkill(this)">
+                <div class="skill-name">Java</div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar" data-percentage="25">
+                        <div class="skill-percentage">25%</div>
+                    </div>
+                </div>
+                <div class="skill-description">Programación orientada a objetos</div>
+            </div>
+            <div class="skill" onclick="animateSkill(this)">
+                <div class="skill-name">HTML/CSS</div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar" data-percentage="85">
+                        <div class="skill-percentage">85%</div>
+                    </div>
+                </div>
+                <div class="skill-description">Desarrollo web frontend</div>
+            </div>
+            <div class="skill" onclick="animateSkill(this)">
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar" data-percentage="45">
+                        <div class="skill-percentage">45%</div>
+                    </div>
+                </div>
+                <div class="skill-description">Interactividad web</div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+
+<footer style="background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%); color: white; text-align: center; padding: 20px 0; margin-top: 40px;">
+    <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+        <p style="margin: 0; font-size: 14px; opacity: 0.9;">
+            © 2025 Anthony Javier Vera Zambrano. Todos los derechos reservados.
+        </p>
+        <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.7;">
+            Desarrollado con pasión y dedicación
+        </p>
+    </div>
+</footer>
+
+<script>
+    // Función para toggle del menú móvil
+    function toggleNav() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+    }
+
+    // Función para marcar el enlace activo
+    function setActive(element) {
+        // Remover clase active de todos los enlaces
+        document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+        });
+        // Agregar clase active al enlace clickeado
+        element.classList.add('active');
+        
+        // Cerrar el menú móvil si está abierto
+        if (window.innerWidth <= 768) {
+            document.getElementById('nav-menu').classList.remove('active');
+        }
+    }
+
+    // Funciones para el certificado
+    function showCertificate() {
+        document.getElementById('certificateModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCertificate() {
+        document.getElementById('certificateModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+
+    // Animar las barras verticales al cargar la página
+    function animateSkillBars() {
+        document.querySelectorAll('.skill-bar').forEach((bar, index) => {
+            const percentage = parseInt(bar.dataset.percentage);
+            const height = (percentage / 100) * 200; // 200px es la altura máxima del contenedor
+            
+            setTimeout(() => {
+                bar.style.height = height + 'px';
+            }, index * 200);
+        });
+    }
+
+    // Función para animar habilidad individual al hacer clic
+    function animateSkill(skillElement) {
+        const bar = skillElement.querySelector('.skill-bar');
+        const percentage = parseInt(bar.dataset.percentage);
+        const height = (percentage / 100) * 200;
+        
+        bar.style.height = '0px';
+        setTimeout(() => {
+            bar.style.height = height + 'px';
+        }, 100);
+    }
+
+    // Indicador de progreso de scroll
+    function updateScrollIndicator() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        document.querySelector('.scroll-indicator').style.width = scrollPercent + '%';
+    }
+
+    // Detectar qué sección está visible para activar el enlace correspondiente
+    function updateActiveLink() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Event listeners
+    window.addEventListener('load', () => {
+        setTimeout(animateSkillBars, 500);
+    });
+
+    window.addEventListener('scroll', () => {
+        updateScrollIndicator();
+        updateActiveLink();
+    });
+
+    // Cerrar menú móvil al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('nav-menu');
+        const toggle = document.querySelector('.nav-toggle');
+        
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+            nav.classList.remove('active');
+        }
+    });
+
+    // Smooth scroll mejorado
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Inicializar indicadores
+    updateScrollIndicator();
+    updateActiveLink();
+</script>
+
+</body>
+</html>
